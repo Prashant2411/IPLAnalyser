@@ -5,6 +5,8 @@ import java.util.List;
 
 public class IPLAnalyserTest {
     public String MOST_RUNS_CSV = "/home/admin1/IdeaProjects/IPLAnalyser/src/test/resources/Batting.csv";
+    public String INCORRECT_FILE = "/home/admin1/IdeaProjects/IPL_Analyser/src/test/resources/MostRuns";
+    public String INCORRECT_FILE_FORMAT = "/home/admin1/IdeaProjects/IPL_Analyser/src/test/resources/InvalidHeader.csv";
 
     @Test
     public void givenMostRunCSV_shouldReturnCorrectValues() {
@@ -41,6 +43,28 @@ public class IPLAnalyserTest {
             Assert.assertEquals(63.15,sortedList.get(99).strikeRate,0);
         } catch (IPLAnalyserException e){
             e.printStackTrace();
+        }
+    }
+
+    //Exception
+
+    @Test
+    public void givenInvalidPath_shouldThrowException() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            int size = iplAnalyser.loadBattingAverages(INCORRECT_FILE);
+        } catch (IPLAnalyserException e){
+            Assert.assertEquals(IPLAnalyserException.ExceptionType.FILE_PATH_PROBLEM,e.type);
+        }
+    }
+
+    @Test
+    public void givenInvalidHeader_shouldThrowException() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            int size = iplAnalyser.loadBattingAverages(INCORRECT_FILE_FORMAT);
+        } catch (IPLAnalyserException e){
+            Assert.assertEquals(IPLAnalyserException.ExceptionType.INVALID_FILE_DATA_FORMAT,e.type);
         }
     }
 }
