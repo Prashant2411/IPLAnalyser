@@ -39,4 +39,10 @@ public class IPLAnalyser {
         getSorted(comp);
         return csvList;
     }
+
+    public List getSortedBattingStrikeRate() {
+        Comparator<MostRunsCSV> comp = (obj1, obj2) -> (obj1.strikeRate - obj2.strikeRate) > 0 ? -1 : 1;
+        getSorted(comp);
+        return csvList;
+    }
 }

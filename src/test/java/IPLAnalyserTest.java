@@ -30,4 +30,17 @@ public class IPLAnalyserTest {
         }
 
     }
+
+    @Test
+    public void givenIPLCSV_shouldReturnTopBattingStrikeRate() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            int size = iplAnalyser.loadBattingAverages(MOST_RUNS_CSV);
+            List<MostRunsCSV> sortedList = iplAnalyser.getSortedBattingStrikeRate();
+            Assert.assertEquals(333.33,sortedList.get(0).strikeRate,0);
+            Assert.assertEquals(63.15,sortedList.get(99).strikeRate,0);
+        } catch (IPLAnalyserException e){
+            e.printStackTrace();
+        }
+    }
 }
