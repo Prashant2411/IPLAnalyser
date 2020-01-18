@@ -25,6 +25,8 @@ public class IPLAnalyser {
             throw new IPLAnalyserException("Invalid Path",IPLAnalyserException.ExceptionType.FILE_PATH_PROBLEM);
         } catch (CSVBuilderException e) {
             throw new IPLAnalyserException(e.getMessage(),e.type.name());
+        } catch (RuntimeException e) {
+            throw new IPLAnalyserException("Invalid File Format",IPLAnalyserException.ExceptionType.INVALID_FILE_DATA_FORMAT);
         }
     }
 
@@ -42,6 +44,12 @@ public class IPLAnalyser {
 
     public List getSortedBattingStrikeRate() {
         Comparator<MostRunsCSV> comp = (obj1, obj2) -> (obj1.strikeRate - obj2.strikeRate) > 0 ? -1 : 1;
+        getSorted(comp);
+        return csvList;
+    }
+
+    public List getSortedMost6sAnd4s() {
+        Comparator<MostRunsCSV> comp = (obj1, obj2) -> ((obj2.sixes * 6 + obj2.fours * 4) - (obj1.sixes * 6 + obj1.fours * 4));
         getSorted(comp);
         return csvList;
     }

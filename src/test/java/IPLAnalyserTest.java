@@ -46,6 +46,19 @@ public class IPLAnalyserTest {
         }
     }
 
+    @Test
+    public void givenIPLCSV_shouldReturnMOst6sAnd4s() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            int size = iplAnalyser.loadBattingAverages(MOST_RUNS_CSV);
+            List<MostRunsCSV> sortedList = iplAnalyser.getSortedMost6sAnd4s();
+            Assert.assertEquals("Andre Russell", sortedList.get(0).player);
+            Assert.assertEquals("Tim Southee", sortedList.get(99).player);
+        } catch (IPLAnalyserException e){
+            e.printStackTrace();
+        }
+    }
+
     //Exception
 
     @Test
