@@ -24,7 +24,7 @@ public class IPLAnalyserTest {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser();
             int size = iplAnalyser.loadBattingAverages(MOST_RUNS_CSV);
-            List<MostRunsCSV> sortedList = iplAnalyser.getSortedBattingAverages();
+            List<BattingDataCSV> sortedList = iplAnalyser.getSortedBattingAverages();
             Assert.assertEquals(83.2, sortedList.get(0).avg, 0);
             Assert.assertEquals(0.0, sortedList.get(99).avg, 0);
         } catch (IPLAnalyserException e) {
@@ -38,7 +38,7 @@ public class IPLAnalyserTest {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser();
             int size = iplAnalyser.loadBattingAverages(MOST_RUNS_CSV);
-            List<MostRunsCSV> sortedList = iplAnalyser.getSortedBattingStrikeRate();
+            List<BattingDataCSV> sortedList = iplAnalyser.getSortedBattingStrikeRate();
             Assert.assertEquals(333.33,sortedList.get(0).strikeRate,0);
             Assert.assertEquals(63.15,sortedList.get(99).strikeRate,0);
         } catch (IPLAnalyserException e){
@@ -51,7 +51,7 @@ public class IPLAnalyserTest {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser();
             int size = iplAnalyser.loadBattingAverages(MOST_RUNS_CSV);
-            List<MostRunsCSV> sortedList = iplAnalyser.getSortedMost6sAnd4s();
+            List<BattingDataCSV> sortedList = iplAnalyser.getSortedMost6sAnd4s();
             Assert.assertEquals("Andre Russell", sortedList.get(0).player);
             Assert.assertEquals("Tim Southee", sortedList.get(99).player);
         } catch (IPLAnalyserException e){
@@ -64,7 +64,7 @@ public class IPLAnalyserTest {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser();
             int size = iplAnalyser.loadBattingAverages(MOST_RUNS_CSV);
-            List<MostRunsCSV> sortedList = iplAnalyser.getSortedMost6sAnd4sWithStrikeRate();
+            List<BattingDataCSV> sortedList = iplAnalyser.getSortedMost6sAnd4sWithStrikeRate();
             Assert.assertEquals("Andre Russell", sortedList.get(0).player);
             Assert.assertEquals("Shakib Al Hasan", sortedList.get(99).player);
         } catch (IPLAnalyserException e){
@@ -77,7 +77,7 @@ public class IPLAnalyserTest {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser();
             int size = iplAnalyser.loadBattingAverages(MOST_RUNS_CSV);
-            List<MostRunsCSV> sortedList = iplAnalyser.getSortedMostStrikeRateWithAverage();
+            List<BattingDataCSV> sortedList = iplAnalyser.getSortedMostStrikeRateWithAverage();
             Assert.assertEquals("MS Dhoni", sortedList.get(0).player);
             Assert.assertEquals("Tim Southee", sortedList.get(99).player);
         } catch (IPLAnalyserException e){

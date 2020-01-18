@@ -14,12 +14,12 @@ import static java.nio.file.Files.newBufferedReader;
 
 public class IPLAnalyser {
 
-    List<MostRunsCSV> csvList = new ArrayList<>();
+    List<BattingDataCSV> csvList = new ArrayList<>();
 
     public int loadBattingAverages(String csvFilePath) throws IPLAnalyserException {
         try (Reader reader = newBufferedReader(Paths.get(String.valueOf(csvFilePath)))) {
             ICSVBuilder csvBuilder = new CSVBuilderFactory().createCSVBuilder();
-            csvList = csvBuilder.getCSVFileInList(reader, MostRunsCSV.class);
+            csvList = csvBuilder.getCSVFileInList(reader, BattingDataCSV.class);
             return csvList.size();
         } catch (IOException e) {
             throw new IPLAnalyserException("Invalid Path",IPLAnalyserException.ExceptionType.FILE_PATH_PROBLEM);
@@ -30,39 +30,39 @@ public class IPLAnalyser {
         }
     }
 
-    public void getSorted(Comparator<MostRunsCSV> comp) {
+    public void getSorted(Comparator<BattingDataCSV> comp) {
         csvList = csvList.stream()
                 .sorted(comp)
                 .collect(Collectors.toList());
     }
 
     public List getSortedBattingAverages() {
-        Comparator<MostRunsCSV> comp = (obj1, obj2) -> (obj1.avg - obj2.avg) > 0 ? -1 : 1;
+        Comparator<BattingDataCSV> comp = (obj1, obj2) -> (obj1.avg - obj2.avg) > 0 ? -1 : 1;
         getSorted(comp);
         return csvList;
     }
 
     public List getSortedBattingStrikeRate() {
-        Comparator<MostRunsCSV> comp = (obj1, obj2) -> (obj1.strikeRate - obj2.strikeRate) > 0 ? -1 : 1;
+        Comparator<BattingDataCSV> comp = (obj1, obj2) -> (obj1.strikeRate - obj2.strikeRate) > 0 ? -1 : 1;
         getSorted(comp);
         return csvList;
     }
 
     public List getSortedMost6sAnd4s() {
-        Comparator<MostRunsCSV> comp = (obj1, obj2) -> ((obj2.sixes * 6 + obj2.fours * 4) - (obj1.sixes * 6 + obj1.fours * 4));
+        Comparator<BattingDataCSV> comp = (obj1, obj2) -> ((obj2.sixes * 6 + obj2.fours * 4) - (obj1.sixes * 6 + obj1.fours * 4));
         getSorted(comp);
         return csvList;
     }
 
     public List getSortedMost6sAnd4sWithStrikeRate() {
-        Comparator<MostRunsCSV> comp = (obj1, obj2) -> ((obj2.sixes * 6 + obj2.fours * 4) - (obj1.sixes * 6 + obj1.fours * 4));
+        Comparator<BattingDataCSV> comp = (obj1, obj2) -> ((obj2.sixes * 6 + obj2.fours * 4) - (obj1.sixes * 6 + obj1.fours * 4));
         comp = comp.thenComparing((obj1, obj2) -> (obj1.strikeRate - obj2.strikeRate) > 0 ? -1 : 1);
         getSorted(comp);
         return csvList;
     }
 
     public List getSortedMostStrikeRateWithAverage() {
-        Comparator<MostRunsCSV> comp = (obj1, obj2) -> (obj1.avg - obj2.avg) > 0 ? -1 : (obj1.avg - obj2.avg) < 0 ? 1 : 0;
+        Comparator<BattingDataCSV> comp = (obj1, obj2) -> (obj1.avg - obj2.avg) > 0 ? -1 : (obj1.avg - obj2.avg) < 0 ? 1 : 0;
         comp = comp.thenComparing((obj1, obj2) -> (obj1.strikeRate - obj2.strikeRate) > 0 ? -1 : 1);
         getSorted(comp);
         return csvList;
