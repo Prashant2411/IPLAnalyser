@@ -53,4 +53,11 @@ public class IPLAnalyser {
         getSorted(comp);
         return csvList;
     }
+
+    public List getSortedMost6sAnd4sWithStrikeRate() {
+        Comparator<MostRunsCSV> comp = (obj1, obj2) -> ((obj2.sixes * 6 + obj2.fours * 4) - (obj1.sixes * 6 + obj1.fours * 4));
+        comp = comp.thenComparing((obj1, obj2) -> (obj1.strikeRate - obj2.strikeRate) > 0 ? -1 : 1);
+        getSorted(comp);
+        return csvList;
+    }
 }
