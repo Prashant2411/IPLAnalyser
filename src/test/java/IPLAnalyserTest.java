@@ -72,6 +72,19 @@ public class IPLAnalyserTest {
         }
     }
 
+    @Test
+    public void givenIPLCSV_shouldReturnMostStrikeRateWithAverages() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            int size = iplAnalyser.loadBattingAverages(MOST_RUNS_CSV);
+            List<MostRunsCSV> sortedList = iplAnalyser.getSortedMostStrikeRateWithAverage();
+            Assert.assertEquals("MS Dhoni", sortedList.get(0).player);
+            Assert.assertEquals("Tim Southee", sortedList.get(99).player);
+        } catch (IPLAnalyserException e){
+            e.printStackTrace();
+        }
+    }
+
     //Exception
 
     @Test

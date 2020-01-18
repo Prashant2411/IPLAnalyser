@@ -60,4 +60,11 @@ public class IPLAnalyser {
         getSorted(comp);
         return csvList;
     }
+
+    public List getSortedMostStrikeRateWithAverage() {
+        Comparator<MostRunsCSV> comp = (obj1, obj2) -> (obj1.avg - obj2.avg) > 0 ? -1 : (obj1.avg - obj2.avg) < 0 ? 1 : 0;
+        comp = comp.thenComparing((obj1, obj2) -> (obj1.strikeRate - obj2.strikeRate) > 0 ? -1 : 1);
+        getSorted(comp);
+        return csvList;
+    }
 }
