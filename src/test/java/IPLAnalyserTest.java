@@ -6,7 +6,7 @@ import java.util.List;
 public class IPLAnalyserTest {
     public String MOST_RUNS_CSV = "/home/admin1/IdeaProjects/IPLAnalyser/src/test/resources/Batting.csv";
     public String INCORRECT_FILE = "/home/admin1/IdeaProjects/IPL_Analyser/src/test/resources/MostRuns";
-    public String INCORRECT_FILE_FORMAT = "/home/admin1/IdeaProjects/IPL_Analyser/src/test/resources/InvalidHeader.csv";
+    public String INCORRECT_FILE_FORMAT = "/home/admin1/IdeaProjects/IPLAnalyser/src/test/resources/InvalidHeader.csv";
 
     @Test
     public void givenMostRunCSV_shouldReturnCorrectValues() {
@@ -22,9 +22,9 @@ public class IPLAnalyserTest {
     @Test
     public void givenIPLCSV_shouldReturnTopBattingAverages() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Stat.AVERAGE);
             int size = iplAnalyser.loadBattingAverages(MOST_RUNS_CSV);
-            List<BattingDataCSV> sortedList = iplAnalyser.getSortedBattingAverages();
+            List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals(83.2, sortedList.get(0).avg, 0);
             Assert.assertEquals(0.0, sortedList.get(99).avg, 0);
         } catch (IPLAnalyserException e) {
@@ -36,9 +36,9 @@ public class IPLAnalyserTest {
     @Test
     public void givenIPLCSV_shouldReturnTopBattingStrikeRate() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Stat.STRIKE_RATE);
             int size = iplAnalyser.loadBattingAverages(MOST_RUNS_CSV);
-            List<BattingDataCSV> sortedList = iplAnalyser.getSortedBattingStrikeRate();
+            List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals(333.33,sortedList.get(0).strikeRate,0);
             Assert.assertEquals(63.15,sortedList.get(99).strikeRate,0);
         } catch (IPLAnalyserException e){
@@ -49,9 +49,9 @@ public class IPLAnalyserTest {
     @Test
     public void givenIPLCSV_shouldReturnMOst6sAnd4s() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Stat.COMPARE_6s_4s);
             int size = iplAnalyser.loadBattingAverages(MOST_RUNS_CSV);
-            List<BattingDataCSV> sortedList = iplAnalyser.getSortedMost6sAnd4s();
+            List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals("Andre Russell", sortedList.get(0).player);
             Assert.assertEquals("Tim Southee", sortedList.get(99).player);
         } catch (IPLAnalyserException e){
@@ -62,9 +62,9 @@ public class IPLAnalyserTest {
     @Test
     public void givenIPLCSV_shouldReturnMOst6sAnd4sWithStrikeRate() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Stat.STRIKE_RATE_4S_6S);
             int size = iplAnalyser.loadBattingAverages(MOST_RUNS_CSV);
-            List<BattingDataCSV> sortedList = iplAnalyser.getSortedMost6sAnd4sWithStrikeRate();
+            List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals("Andre Russell", sortedList.get(0).player);
             Assert.assertEquals("Shakib Al Hasan", sortedList.get(99).player);
         } catch (IPLAnalyserException e){
@@ -75,9 +75,9 @@ public class IPLAnalyserTest {
     @Test
     public void givenIPLCSV_shouldReturnMostStrikeRateWithAverages() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Stat.STRIKE_RATE_AVERAGE);
             int size = iplAnalyser.loadBattingAverages(MOST_RUNS_CSV);
-            List<BattingDataCSV> sortedList = iplAnalyser.getSortedMostStrikeRateWithAverage();
+            List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals("MS Dhoni", sortedList.get(0).player);
             Assert.assertEquals("Tim Southee", sortedList.get(99).player);
         } catch (IPLAnalyserException e){
