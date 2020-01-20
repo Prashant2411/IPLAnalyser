@@ -11,18 +11,18 @@ public class IPLAnalyser {
     static Comparator<BattingDataCSV> comp = null;
 
     public IPLAnalyser(ComparatorToSort.Sorting_Fields stat) {
-        this.stat = stat;
+        this.stat = stat;git
     }
 
     public IPLAnalyser() {
     }
 
-    public int loadBattingAverages(String csvFilePath) throws IPLAnalyserException {
+    public int loadBattingData(String csvFilePath) throws IPLAnalyserException {
         csvList = new DataLoader().loadCSVRecord(BattingDataCSV.class, csvFilePath);
         return csvList.size();
     }
 
-    public int loadBowlingAverages(String csvFilePath) throws IPLAnalyserException {
+    public int loadBowlingData(String csvFilePath) throws IPLAnalyserException {
         csvList = new DataLoader().loadCSVRecord(BowlingDataCSV.class, csvFilePath);
         return csvList.size();
     }
