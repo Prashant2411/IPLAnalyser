@@ -27,4 +27,18 @@ public class DataLoader {
             throw new IPLAnalyserException("Invalid File Format",IPLAnalyserException.ExceptionType.INVALID_FILE_DATA_FORMAT);
         }
     }
+
+    public List<BattingDataCSV> loadBowlingAverages(String csvFilePath) throws IPLAnalyserException {
+        try (Reader reader = newBufferedReader(Paths.get(String.valueOf(csvFilePath)))) {
+            ICSVBuilder csvBuilder = new CSVBuilderFactory().createCSVBuilder();
+            csvList = csvBuilder.getCSVFileInList(reader, BowlingDataCSV.class);
+            return csvList;
+        } catch (IOException e) {
+            throw new IPLAnalyserException("Invalid Path",IPLAnalyserException.ExceptionType.FILE_PATH_PROBLEM);
+        } catch (CSVBuilderException e) {
+            throw new IPLAnalyserException(e.getMessage(),e.type.name());
+        } catch (RuntimeException e) {
+            throw new IPLAnalyserException("Invalid File Format",IPLAnalyserException.ExceptionType.INVALID_FILE_DATA_FORMAT);
+        }
+    }
 }

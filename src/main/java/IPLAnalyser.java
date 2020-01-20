@@ -22,6 +22,11 @@ public class IPLAnalyser {
         return csvList.size();
     }
 
+    public int loadBowlingAverages(String csvFilePath) throws IPLAnalyserException {
+        csvList = new DataLoader().loadBowlingAverages(csvFilePath);
+        return csvList.size();
+    }
+
     public List<BattingDataCSV> getSorted() throws IPLAnalyserException {
         if(csvList.size()==0 || csvList==null)
             throw new IPLAnalyserException("No List Found",IPLAnalyserException.ExceptionType.NULL_EXCEPTION);

@@ -8,6 +8,10 @@ public class IPLAnalyserTest {
     public String INCORRECT_FILE = "/home/admin1/IdeaProjects/IPL_Analyser/src/test/resources/MostRuns";
     public String INCORRECT_FILE_FORMAT = "/home/admin1/IdeaProjects/IPLAnalyser/src/test/resources/InvalidHeader.csv";
 
+    public String BOWLING_CSV = "/home/admin1/IdeaProjects/IPLAnalyser/src/test/resources/Bowling.csv";
+
+    //Batting
+
     @Test
     public void givenMostRunCSV_shouldReturnCorrectValues() {
         try {
@@ -94,6 +98,19 @@ public class IPLAnalyserTest {
             Assert.assertEquals("David Warner", sortedList.get(0).player);
             Assert.assertEquals("Tim Southee", sortedList.get(99).player);
         } catch (IPLAnalyserException e){
+            e.printStackTrace();
+        }
+    }
+
+    //Bowling
+
+    @Test
+    public void givenBowlingCSV_shouldReturnCorrectValues() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            int size = iplAnalyser.loadBowlingAverages(BOWLING_CSV);
+            Assert.assertEquals(99, size);
+        } catch (IPLAnalyserException e) {
             e.printStackTrace();
         }
     }
