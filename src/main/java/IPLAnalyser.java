@@ -3,18 +3,26 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toCollection;
+
 public class IPLAnalyser {
 
     public ComparatorToSort.Sorting_Fields stat;
+    public BatOrBowl batOrBowl;
 
-    List<BattingDataCSV> csvList = new ArrayList<>();
-    static Comparator<BattingDataCSV> comp = null;
+    List csvList = new ArrayList<>();
+    static Comparator comp = null;
 
-    public IPLAnalyser(ComparatorToSort.Sorting_Fields stat) {
-        this.stat = stat;git
+    public enum BatOrBowl{
+        BATTING, BOWLING
     }
 
     public IPLAnalyser() {
+    }
+
+    public IPLAnalyser(ComparatorToSort.Sorting_Fields stat, BatOrBowl batOrBowl) {
+        this.stat = stat;
+        this.batOrBowl = batOrBowl;
     }
 
     public int loadBattingData(String csvFilePath) throws IPLAnalyserException {
@@ -27,13 +35,13 @@ public class IPLAnalyser {
         return csvList.size();
     }
 
-    public List<BattingDataCSV> getSorted() throws IPLAnalyserException {
+    public List getSorted() throws IPLAnalyserException {
         if(csvList.size()==0 || csvList==null)
             throw new IPLAnalyserException("No List Found",IPLAnalyserException.ExceptionType.NULL_EXCEPTION);
-        comp = new ComparatorToSort().getComparator(stat);
-        csvList = csvList.stream()
+        comp = new ComparatorToSort().getComparator(stat, batOrBowl);
+        csvList = (List) csvList.stream()
                 .sorted(comp)
-                .collect(Collectors.toList());
+                .collect(toCollection(ArrayList::new));
         return csvList;
     }
 }

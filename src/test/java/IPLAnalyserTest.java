@@ -26,7 +26,7 @@ public class IPLAnalyserTest {
     @Test
     public void givenIPLCSV_shouldReturnTopBattingAverages() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.AVERAGE);
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.BAT_AVERAGE, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadBattingData(MOST_RUNS_CSV);
             List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals(83.2, sortedList.get(0).avg, 0);
@@ -40,7 +40,7 @@ public class IPLAnalyserTest {
     @Test
     public void givenIPLCSV_shouldReturnTopBattingStrikeRate() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_RATE);
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_RATE, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadBattingData(MOST_RUNS_CSV);
             List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals(333.33,sortedList.get(0).strikeRate,0);
@@ -53,7 +53,7 @@ public class IPLAnalyserTest {
     @Test
     public void givenIPLCSV_shouldReturnMOst6sAnd4s() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.COMPARE_6s_4s);
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.COMPARE_6s_4s, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadBattingData(MOST_RUNS_CSV);
             List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals("Andre Russell", sortedList.get(0).player);
@@ -66,7 +66,7 @@ public class IPLAnalyserTest {
     @Test
     public void givenIPLCSV_shouldReturnMOst6sAnd4sWithStrikeRate() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_RATE_4S_6S);
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_RATE_4S_6S, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadBattingData(MOST_RUNS_CSV);
             List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals("Andre Russell", sortedList.get(0).player);
@@ -79,7 +79,7 @@ public class IPLAnalyserTest {
     @Test
     public void givenIPLCSV_shouldReturnMostStrikeRateWithAverages() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_RATE_AVERAGE);
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_RATE_AVERAGE, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadBattingData(MOST_RUNS_CSV);
             List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals("MS Dhoni", sortedList.get(0).player);
@@ -92,7 +92,7 @@ public class IPLAnalyserTest {
     @Test
     public void givenIPLCSV_shouldReturnMostRunsWithStrikeRate() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.MAX_RUNS_AVERAGES);
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.MAX_RUNS_AVERAGES, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadBattingData(MOST_RUNS_CSV);
             List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals("David Warner", sortedList.get(0).player);
@@ -113,6 +113,22 @@ public class IPLAnalyserTest {
         } catch (IPLAnalyserException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void givenIPLCSV_shouldReturnTopBowlingAverages() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.BOWL_AVERAGE, IPLAnalyser.BatOrBowl.BOWLING);
+            int size = iplAnalyser.loadBowlingData(BOWLING_CSV);
+            List<BowlingDataCSV> sortedList = iplAnalyser.getSorted();
+            for (int i=0;i<sortedList.size();i++)
+                System.out.println(sortedList.get(i).player+" : "+sortedList.get(i).avg);
+            Assert.assertEquals(0.0, sortedList.get(0).avg, 0);
+            Assert.assertEquals(166.0, sortedList.get(98).avg, 0);
+        } catch (IPLAnalyserException e) {
+            e.printStackTrace();
+        }
+
     }
 
     //Exception
