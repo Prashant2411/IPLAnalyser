@@ -18,12 +18,12 @@ public class IPLAnalyser {
     }
 
     public int loadBattingAverages(String csvFilePath) throws IPLAnalyserException {
-        csvList = new DataLoader().loadBattingAverages(csvFilePath);
+        csvList = new DataLoader().loadCSVRecord(BattingDataCSV.class, csvFilePath);
         return csvList.size();
     }
 
     public int loadBowlingAverages(String csvFilePath) throws IPLAnalyserException {
-        csvList = new DataLoader().loadBowlingAverages(csvFilePath);
+        csvList = new DataLoader().loadCSVRecord(BowlingDataCSV.class, csvFilePath);
         return csvList.size();
     }
 
