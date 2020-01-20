@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 
 public class IPLAnalyser {
 
-    public ComparatorToSort.Stat stat;
+    public ComparatorToSort.Sorting_Fields stat;
 
     List<BattingDataCSV> csvList = new ArrayList<>();
     static Comparator<BattingDataCSV> comp = null;
 
-    public IPLAnalyser(ComparatorToSort.Stat stat) {
+    public IPLAnalyser(ComparatorToSort.Sorting_Fields stat) {
         this.stat = stat;
     }
 
