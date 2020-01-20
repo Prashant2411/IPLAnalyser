@@ -85,6 +85,19 @@ public class IPLAnalyserTest {
         }
     }
 
+    @Test
+    public void givenIPLCSV_shouldReturnMostRunsWithStrikeRate() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Stat.MAX_RUNS_AVERAGES);
+            int size = iplAnalyser.loadBattingAverages(MOST_RUNS_CSV);
+            List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
+            Assert.assertEquals("David Warner", sortedList.get(0).player);
+            Assert.assertEquals("Pawan Negi", sortedList.get(99).player);
+        } catch (IPLAnalyserException e){
+            e.printStackTrace();
+        }
+    }
+
     //Exception
 
     @Test

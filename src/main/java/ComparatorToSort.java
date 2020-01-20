@@ -6,7 +6,7 @@ import java.util.Map;
 public class ComparatorToSort<B> {
 
     public enum Stat{
-        AVERAGE, STRIKE_RATE, COMPARE_6s_4s, STRIKE_RATE_4S_6S, STRIKE_RATE_AVERAGE
+        AVERAGE, STRIKE_RATE, COMPARE_6s_4s, STRIKE_RATE_4S_6S, STRIKE_RATE_AVERAGE, MAX_RUNS, MAX_RUNS_AVERAGES
     }
 
     Comparator<BattingDataCSV> comp = null;
@@ -18,6 +18,8 @@ public class ComparatorToSort<B> {
         arrayList.add((obj1, obj2) -> ((obj2.sixes * 6 + obj2.fours * 4) - (obj1.sixes * 6 + obj1.fours * 4)));
         arrayList.add(arrayList.get(Stat.COMPARE_6s_4s.ordinal()).thenComparing(arrayList.get(Stat.STRIKE_RATE.ordinal())));
         arrayList.add(arrayList.get(Stat.AVERAGE.ordinal()).thenComparing(arrayList.get(Stat.STRIKE_RATE.ordinal())));
+        arrayList.add((obj1, obj2) -> obj2.runs-obj1.runs);
+        arrayList.add(arrayList.get(Stat.MAX_RUNS.ordinal()).thenComparing(arrayList.get(Stat.AVERAGE.ordinal())));
         return arrayList.get(stat.ordinal());
     }
 }
