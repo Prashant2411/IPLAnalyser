@@ -5,7 +5,7 @@ public class ComparatorToSort {
 
     public enum Sorting_Fields {
         BAT_AVERAGE, STRIKE_RATE, COMPARE_6s_4s, STRIKE_RATE_4S_6S, STRIKE_RATE_AVERAGE, MAX_RUNS, MAX_RUNS_AVERAGES,
-        BOWL_AVERAGE
+        BOWL_AVERAGE, BOWL_STRIKE_RATE
     }
 
     public Comparator getComparator(Sorting_Fields stat, IPLAnalyser.BatOrBowl batOrBowl) {
@@ -22,6 +22,7 @@ public class ComparatorToSort {
         }
         ArrayList<Comparator<BowlingDataCSV>> arrayList = new ArrayList<>();
         arrayList.add((obj1, obj2) -> (obj1.avg - obj2.avg) < 0 ? -1 : (obj1.avg - obj2.avg) > 0 ? 1 : 0);
+        arrayList.add((obj1, obj2) -> (obj1.strikeRate - obj2.strikeRate) < 0 ? -1 : 1);
         return arrayList.get(stat.ordinal()-Sorting_Fields.BOWL_AVERAGE.ordinal());
     }
 }
