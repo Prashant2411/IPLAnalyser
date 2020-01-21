@@ -26,9 +26,9 @@ public class IPLAnalyserTest {
     @Test
     public void givenIPLCSV_shouldReturnTopBattingAverages() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.BAT_AVERAGE, IPLAnalyser.BatOrBowl.BATTING);
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.AVERAGE, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadBattingData(MOST_RUNS_CSV);
-            List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
+            List<CricketDataDAO> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals(83.2, sortedList.get(0).avg, 0);
             Assert.assertEquals(0.0, sortedList.get(99).avg, 0);
         } catch (IPLAnalyserException e) {
@@ -42,7 +42,7 @@ public class IPLAnalyserTest {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_RATE, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadBattingData(MOST_RUNS_CSV);
-            List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
+            List<CricketDataDAO> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals(333.33,sortedList.get(0).strikeRate,0);
             Assert.assertEquals(63.15,sortedList.get(99).strikeRate,0);
         } catch (IPLAnalyserException e){
@@ -55,7 +55,7 @@ public class IPLAnalyserTest {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.COMPARE_6s_4s, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadBattingData(MOST_RUNS_CSV);
-            List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
+            List<CricketDataDAO> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals("Andre Russell", sortedList.get(0).player);
             Assert.assertEquals("Tim Southee", sortedList.get(99).player);
         } catch (IPLAnalyserException e){
@@ -68,7 +68,7 @@ public class IPLAnalyserTest {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_RATE_4S_6S, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadBattingData(MOST_RUNS_CSV);
-            List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
+            List<CricketDataDAO> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals("Andre Russell", sortedList.get(0).player);
             Assert.assertEquals("Shakib Al Hasan", sortedList.get(99).player);
         } catch (IPLAnalyserException e){
@@ -81,7 +81,7 @@ public class IPLAnalyserTest {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_RATE_AVERAGE, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadBattingData(MOST_RUNS_CSV);
-            List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
+            List<CricketDataDAO> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals("MS Dhoni", sortedList.get(0).player);
             Assert.assertEquals("Tim Southee", sortedList.get(99).player);
         } catch (IPLAnalyserException e){
@@ -94,7 +94,7 @@ public class IPLAnalyserTest {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.MAX_RUNS_AVERAGES, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadBattingData(MOST_RUNS_CSV);
-            List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
+            List<CricketDataDAO> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals("David Warner", sortedList.get(0).player);
             Assert.assertEquals("Tim Southee", sortedList.get(99).player);
         } catch (IPLAnalyserException e){
@@ -118,9 +118,9 @@ public class IPLAnalyserTest {
     @Test
     public void givenIPLCSV_shouldReturnTopBowlingAverages() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.BOWL_AVERAGE, IPLAnalyser.BatOrBowl.BOWLING);
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.AVERAGE, IPLAnalyser.BatOrBowl.BOWLING);
             int size = iplAnalyser.loadBowlingData(BOWLING_CSV);
-            List<BowlingDataCSV> sortedList = iplAnalyser.getSorted();
+            List<CricketDataDAO> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals(0.0, sortedList.get(0).avg, 0);
             Assert.assertEquals(166.0, sortedList.get(98).avg, 0);
         } catch (IPLAnalyserException e) {
@@ -132,15 +132,14 @@ public class IPLAnalyserTest {
     @Test
     public void givenIPLCSV_shouldReturnTopBowlingStrikerRate() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.BOWL_STRIKE_RATE, IPLAnalyser.BatOrBowl.BOWLING);
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_RATE, IPLAnalyser.BatOrBowl.BOWLING);
             int size = iplAnalyser.loadBowlingData(BOWLING_CSV);
-            List<BowlingDataCSV> sortedList = iplAnalyser.getSorted();
+            List<CricketDataDAO> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals(0.0, sortedList.get(0).avg, 0);
             Assert.assertEquals(166.0, sortedList.get(98).avg, 0);
         } catch (IPLAnalyserException e) {
             e.printStackTrace();
         }
-
     }
 
     //Exception

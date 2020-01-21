@@ -2,22 +2,34 @@ import csvBuilder.CSVBuilderException;
 import csvBuilder.CSVBuilderFactory;
 import csvBuilder.ICSVBuilder;
 
+import java.awt.image.CropImageFilter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 import static java.nio.file.Files.newBufferedReader;
 
 public class DataLoader {
 
-    List<BattingDataCSV> csvList = new ArrayList<>();
+    List<CricketDataDAO> csvList = new ArrayList<>();
 
-    public List<BattingDataCSV> loadCSVRecord(Class className, String csvFilePath) throws IPLAnalyserException {
+    public <E> List loadCSVRecord(Class<E> className, String csvFilePath) throws IPLAnalyserException {
         try (Reader reader = newBufferedReader(Paths.get(String.valueOf(csvFilePath)))) {
             ICSVBuilder csvBuilder = new CSVBuilderFactory().createCSVBuilder();
-            csvList = csvBuilder.getCSVFileInList(reader, className);
+            List<E> csvList1 = csvBuilder.getCSVFileInList(reader, className);
+            if(className.equals(BattingDataCSV.class)) {
+                StreamSupport.stream(csvList1.spliterator(), false)
+                        .map(BattingDataCSV.class::cast)
+                        .forEach(cricketData -> csvList.add(new CricketDataDAO(cricketData)));
+            }
+            else if(className.equals(BowlingDataCSV.class)){
+                StreamSupport.stream(csvList1.spliterator(), false)
+                        .map(BowlingDataCSV.class::cast)
+                        .forEach(cricketData -> csvList.add(new CricketDataDAO(cricketData)));
+            }
             return csvList;
         } catch (IOException e) {
             throw new IPLAnalyserException("Invalid Path",IPLAnalyserException.ExceptionType.FILE_PATH_PROBLEM);
