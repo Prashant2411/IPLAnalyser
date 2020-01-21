@@ -26,13 +26,8 @@ public class IPLAnalyser {
         this.batOrBowl = batOrBowl;
     }
 
-    public int loadBattingData(String csvFilePath) throws IPLAnalyserException {
-        csvList = new DataLoader().loadCSVRecord(BattingDataCSV.class, csvFilePath);
-        return csvList.size();
-    }
-
-    public int loadBowlingData(String csvFilePath) throws IPLAnalyserException {
-        csvList = new DataLoader().loadCSVRecord(BowlingDataCSV.class, csvFilePath);
+    public int loadData(String csvFilePath) throws IPLAnalyserException {
+        csvList = new LoadDataFactory().getLoadData(batOrBowl, csvFilePath);
         return csvList.size();
     }
 
