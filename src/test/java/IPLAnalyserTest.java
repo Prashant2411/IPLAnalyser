@@ -116,7 +116,7 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenIPLCSV_shouldReturnTopBowlingAverages() {
+    public void givenIPLBowlCSV_shouldReturnTopBowlingAverages() {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.AVERAGE, IPLAnalyser.BatOrBowl.BOWLING);
             int size = iplAnalyser.loadData(BOWLING_CSV);
@@ -130,7 +130,7 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenIPLCSV_shouldReturnTopBowlingStrikerRate() {
+    public void givenIPLBowlCSV_shouldReturnTopBowlingStrikerRate() {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_RATE, IPLAnalyser.BatOrBowl.BOWLING);
             int size = iplAnalyser.loadData(BOWLING_CSV);
@@ -143,7 +143,7 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenIPLCSV_shouldReturnTopBowlingEconomyRate() {
+    public void givenIPLBowlCSV_shouldReturnTopBowlingEconomyRate() {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.ECONOMY_RATE, IPLAnalyser.BatOrBowl.BOWLING);
             int size = iplAnalyser.loadData(BOWLING_CSV);
@@ -156,7 +156,23 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenIPLCSV_shouldReturnMost5And4WicketWithStrikeRate() {
+    public void givenIPLBowlCSV_shouldReturnHeighestAverageWithStrikeRate() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_RATE_AVERAGE, IPLAnalyser.BatOrBowl.BOWLING);
+            int size = iplAnalyser.loadData(BOWLING_CSV);
+            List<CricketDataDAO> sortedList = iplAnalyser.getSorted();
+            for (int i=0;i<sortedList.size();i++) {
+                System.out.println(sortedList.get(i).player+" : "+sortedList.get(i).avg+" : "+sortedList.get(i).strikeRate);
+            }
+            Assert.assertEquals("Shivam Dube", sortedList.get(0).player);
+            Assert.assertEquals("Krishnappa Gowtham", sortedList.get(98).player);
+        } catch (IPLAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIPLBowlCSV_shouldReturnMost5And4WicketWithStrikeRate() {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_5W_4W, IPLAnalyser.BatOrBowl.BOWLING);
             int size = iplAnalyser.loadData(BOWLING_CSV);

@@ -36,7 +36,6 @@ public class IPLAnalyser {
             throw new IPLAnalyserException("No List Found",IPLAnalyserException.ExceptionType.NULL_EXCEPTION);
         sortComparator = new ComparatorToSort().getComparator(stat);
         if (batOrBowl.equals(BatOrBowl.BOWLING)){sortComparator=sortComparator.reversed();}
-        else if (batOrBowl.equals(BatOrBowl.BATTING)){ sortComparator=sortComparator;}
         csvList = csvList.stream()
                 .sorted(sortComparator)
                 .collect(Collectors.toList());
