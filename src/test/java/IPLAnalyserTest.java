@@ -155,6 +155,19 @@ public class IPLAnalyserTest {
         }
     }
 
+    @Test
+    public void givenIPLCSV_shouldReturnMost5And4WicketWithStrikeRate() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_5W_4W, IPLAnalyser.BatOrBowl.BOWLING);
+            int size = iplAnalyser.loadBowlingData(BOWLING_CSV);
+            List<CricketDataDAO> sortedList = iplAnalyser.getSorted();
+            Assert.assertEquals("Kagiso Rabada", sortedList.get(0).player);
+            Assert.assertEquals("Krishnappa Gowtham", sortedList.get(98).player);
+        } catch (IPLAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
     //Exception
 
     @Test
