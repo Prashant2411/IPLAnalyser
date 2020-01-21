@@ -23,7 +23,7 @@ public class DataLoader {
             if(className.equals(BattingDataCSV.class)) {
                 StreamSupport.stream(csvList1.spliterator(), false)
                         .map(BattingDataCSV.class::cast)
-                        .forEach(cricketData -> csvList.add(new CricketDataDAO(cricketData)));
+                          .forEach(cricketData -> csvList.add(new CricketDataDAO(cricketData)));
             }
             else if(className.equals(BowlingDataCSV.class)){
                 StreamSupport.stream(csvList1.spliterator(), false)

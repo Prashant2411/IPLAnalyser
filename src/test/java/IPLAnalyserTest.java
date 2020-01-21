@@ -135,8 +135,21 @@ public class IPLAnalyserTest {
             IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_RATE, IPLAnalyser.BatOrBowl.BOWLING);
             int size = iplAnalyser.loadBowlingData(BOWLING_CSV);
             List<CricketDataDAO> sortedList = iplAnalyser.getSorted();
-            Assert.assertEquals(0.0, sortedList.get(0).avg, 0);
-            Assert.assertEquals(166.0, sortedList.get(98).avg, 0);
+            Assert.assertEquals(0.0, sortedList.get(0).strikeRate, 0);
+            Assert.assertEquals(120.0, sortedList.get(98).strikeRate, 0);
+        } catch (IPLAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIPLCSV_shouldReturnTopBowlingEconomyRate() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.ECONOMY_RATE, IPLAnalyser.BatOrBowl.BOWLING);
+            int size = iplAnalyser.loadBowlingData(BOWLING_CSV);
+            List<CricketDataDAO> sortedList = iplAnalyser.getSorted();
+            Assert.assertEquals(4.8, sortedList.get(0).economyRate, 0);
+            Assert.assertEquals(13.5, sortedList.get(98).economyRate, 0);
         } catch (IPLAnalyserException e) {
             e.printStackTrace();
         }
