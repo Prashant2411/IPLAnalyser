@@ -1,6 +1,5 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toCollection;
 
@@ -9,7 +8,7 @@ public class IPLAnalyser {
     public ComparatorToSort.Sorting_Fields stat;
     public BatOrBowl batOrBowl;
 
-    List<CricketDataDAO> csvList = new ArrayList<>();
+    Map<String, CricketDataDAO> csvMap = new HashMap<>();
     static Comparator<CricketDataDAO> sortComparator = null;
 
     public enum BatOrBowl{
@@ -25,19 +24,19 @@ public class IPLAnalyser {
     }
 
     public int loadData(String csvFilePath) throws IPLAnalyserException {
-        csvList = new LoadDataFactory().getLoadData(batOrBowl, csvFilePath);
-        return csvList.size();
+        csvMap = new LoadDataFactory().getLoadData(batOrBowl, csvFilePath);
+        return csvMap.size();
     }
 
     public List getSorted() throws IPLAnalyserException {
-        if(csvList.size()==0 || csvList==null)
+        if(csvMap.size()==0 || csvMap ==null)
             throw new IPLAnalyserException("No List Found",IPLAnalyserException.ExceptionType.NULL_EXCEPTION);
         sortComparator = new ComparatorToSort().getComparator(stat);
         if (batOrBowl.equals(BatOrBowl.BOWLING)){sortComparator=sortComparator.reversed();}
-        List csvList1 = csvList.stream()
+        List csvList1 = csvMap.values().stream()
                 .sorted(sortComparator)
                 .map(cricketDataDAO -> cricketDataDAO.getCricketDataDTO(batOrBowl))
-                .collect(toCollection(ArrayList::new));
+                .collect(Collectors.toList());
         return csvList1;
     }
 }

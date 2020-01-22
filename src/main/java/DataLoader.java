@@ -2,35 +2,35 @@ import csvBuilder.CSVBuilderException;
 import csvBuilder.CSVBuilderFactory;
 import csvBuilder.ICSVBuilder;
 
-import java.awt.image.CropImageFilter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.StreamSupport;
 
 import static java.nio.file.Files.newBufferedReader;
 
 public class DataLoader {
 
-    List<CricketDataDAO> csvList = new ArrayList<>();
+    Map<String, CricketDataDAO> csvMap = new HashMap<>();
 
-    public <E> List loadCSVRecord(Class<E> className, String csvFilePath) throws IPLAnalyserException {
+    public <E> Map<String, CricketDataDAO> loadCSVRecord(Class<E> className, String csvFilePath) throws IPLAnalyserException {
         try (Reader reader = newBufferedReader(Paths.get(String.valueOf(csvFilePath)))) {
             ICSVBuilder csvBuilder = new CSVBuilderFactory().createCSVBuilder();
             List<E> csvList1 = csvBuilder.getCSVFileInList(reader, className);
             if(className.equals(BattingDataCSV.class)) {
                 StreamSupport.stream(csvList1.spliterator(), false)
                         .map(BattingDataCSV.class::cast)
-                          .forEach(cricketData -> csvList.add(new CricketDataDAO(cricketData)));
+                          .forEach(cricketData -> csvMap.put(cricketData.player, new CricketDataDAO(cricketData)));
             }
             else if(className.equals(BowlingDataCSV.class)){
                 StreamSupport.stream(csvList1.spliterator(), false)
                         .map(BowlingDataCSV.class::cast)
-                        .forEach(cricketData -> csvList.add(new CricketDataDAO(cricketData)));
+                        .forEach(cricketData -> csvMap.put(cricketData.player, new CricketDataDAO(cricketData)));
             }
-            return csvList;
+            return csvMap;
         } catch (IOException e) {
             throw new IPLAnalyserException("Invalid Path",IPLAnalyserException.ExceptionType.FILE_PATH_PROBLEM);
         } catch (CSVBuilderException e) {

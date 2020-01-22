@@ -7,7 +7,7 @@ public class ComparatorToSort {
 
     public enum Sorting_Fields {
         AVERAGE, STRIKE_RATE, COMPARE_6s_4s, STRIKE_RATE_4S_6S, STRIKE_RATE_AVERAGE, MAX_RUNS, MAX_RUNS_AVERAGES,
-        ECONOMY_RATE, COMPARE_5W_AND_4W, STRIKE_5W_4W
+        ECONOMY_RATE, COMPARE_5W_AND_4W, STRIKE_5W_4W, WICKET, WICKET_AVERAGE
     }
 
     public Comparator<CricketDataDAO> getComparator(Sorting_Fields stat) {
@@ -21,6 +21,8 @@ public class ComparatorToSort {
         arrayList.add((obj1, obj2) -> obj1.economyRate - obj2.economyRate < 0 ? 1 : obj1.economyRate - obj2.economyRate > 0 ? -1 : 0);
         arrayList.add(Comparator.comparingInt(obj -> (obj.fiveWicket * 5 + obj.fourWicket * 4)));
         arrayList.add(arrayList.get(Sorting_Fields.COMPARE_5W_AND_4W.ordinal()).thenComparing(arrayList.get(Sorting_Fields.STRIKE_RATE.ordinal())));
+        arrayList.add(Comparator.comparingInt(obj -> obj.wickets));
+        arrayList.add(arrayList.get(Sorting_Fields.WICKET.ordinal()).thenComparing(arrayList.get(Sorting_Fields.AVERAGE.ordinal())));
         return arrayList.get(stat.ordinal());
     }
 }

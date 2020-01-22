@@ -58,7 +58,7 @@ public class IPLAnalyserTest {
             int size = iplAnalyser.loadData(MOST_RUNS_CSV);
             List<BattingDataCSV> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals("Andre Russell", sortedList.get(0).player);
-            Assert.assertEquals("Tim Southee", sortedList.get(99).player);
+            Assert.assertEquals("Shakib Al Hasan", sortedList.get(99).player);
         } catch (IPLAnalyserException e) {
             e.printStackTrace();
         }
@@ -162,7 +162,7 @@ public class IPLAnalyserTest {
             IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.STRIKE_RATE_AVERAGE, IPLAnalyser.BatOrBowl.BOWLING);
             int size = iplAnalyser.loadData(BOWLING_CSV);
             List<BowlingDataCSV> sortedList = iplAnalyser.getSorted();
-            Assert.assertEquals("Shivam Dube", sortedList.get(0).player);
+            Assert.assertEquals("Suresh Raina", sortedList.get(0).player);
             Assert.assertEquals("Krishnappa Gowtham", sortedList.get(98).player);
         } catch (IPLAnalyserException e) {
             e.printStackTrace();
@@ -177,6 +177,19 @@ public class IPLAnalyserTest {
             List<BowlingDataCSV> sortedList = iplAnalyser.getSorted();
             Assert.assertEquals("Kagiso Rabada", sortedList.get(0).player);
             Assert.assertEquals("Krishnappa Gowtham", sortedList.get(98).player);
+        } catch (IPLAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIPLBowlCSV_shouldReturnWicketsWithAverage() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.WICKET_AVERAGE, IPLAnalyser.BatOrBowl.BOWLING);
+            int size = iplAnalyser.loadData(BOWLING_CSV);
+            List<BowlingDataCSV> sortedList = iplAnalyser.getSorted();
+            Assert.assertEquals("Imran Tahir", sortedList.get(0).player);
+            Assert.assertEquals("Yusuf Pathan", sortedList.get(98).player);
         } catch (IPLAnalyserException e) {
             e.printStackTrace();
         }
