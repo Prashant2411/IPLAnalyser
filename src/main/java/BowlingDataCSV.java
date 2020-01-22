@@ -30,6 +30,25 @@ public class BowlingDataCSV {
         @CsvBindByName(column = "5w", required = true)
         public int fiveWicket;
 
+        public BowlingDataCSV() {
+        }
+
+        public BowlingDataCSV(int pos, String player, int matches, int inns, double over, int runs, int wickets, int bestBowlingIndex, double avg, double economyRate, double strikeRate, int fourWicket, int fiveWicket) {
+                this.pos = pos;
+                this.player = player;
+                this.matches = matches;
+                this.inns = inns;
+                this.over = over;
+                this.runs = runs;
+                this.wickets = wickets;
+                this.bestBowlingIndex = bestBowlingIndex;
+                this.avg = avg;
+                this.economyRate = economyRate;
+                this.strikeRate = strikeRate;
+                this.fourWicket = fourWicket;
+                this.fiveWicket = fiveWicket;
+        }
+
         @Override
         public String toString() {
                 return "BowlingDataCSV{" +

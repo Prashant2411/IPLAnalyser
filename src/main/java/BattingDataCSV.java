@@ -49,6 +49,26 @@ public class BattingDataCSV {
                 ", sixes=" + sixes +
                 '}';
     }
+
+    public BattingDataCSV() {
+    }
+
+    public BattingDataCSV(int pos, String player, int matches, int inns, int notOut, int runs, int highScore, double avg, int ballFaced, double strikeRate, int centuries, int halfCenturies, int fours, int sixes) {
+        this.pos=pos;
+        this.player=player;
+        this.matches=matches;
+        this.inns=inns;
+        this.notOut=notOut;
+        this.runs=runs;
+        this.highScore=highScore;
+        this.avg=avg;
+        this.ballFaced=ballFaced;
+        this.strikeRate=strikeRate;
+        this.centuries=centuries;
+        this.halfCenturies=halfCenturies;
+        this.fours=fours;
+        this.sixes=sixes;
+    }
 }
 
 

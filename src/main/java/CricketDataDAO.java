@@ -53,6 +53,9 @@ public class CricketDataDAO {
         fiveWicket = bowlDataCSV.fiveWicket;
     }
 
+    public CricketDataDAO() {
+    }
+
     @Override
     public String toString() {
         return "CricketDataDAO{" +
@@ -77,5 +80,11 @@ public class CricketDataDAO {
                 ", fourWicket=" + fourWicket +
                 ", fiveWicket=" + fiveWicket +
                 '}';
+    }
+
+    public Object getCricketDataDTO(IPLAnalyser.BatOrBowl batOrBowl) {
+        if(IPLAnalyser.BatOrBowl.BATTING.equals(batOrBowl))
+            return new BattingDataCSV(pos, player, matches, inns, notOut, runs, highScore, avg, ballFaced, strikeRate, centuries, halfCenturies, fours, sixes);
+        return new BowlingDataCSV(pos, player, matches, inns, over, runs, wickets, bestBowlingIndex, avg, economyRate, strikeRate, fourWicket, fiveWicket);
     }
 }

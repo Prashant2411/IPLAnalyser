@@ -1,8 +1,6 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toCollection;
 
@@ -36,9 +34,10 @@ public class IPLAnalyser {
             throw new IPLAnalyserException("No List Found",IPLAnalyserException.ExceptionType.NULL_EXCEPTION);
         sortComparator = new ComparatorToSort().getComparator(stat);
         if (batOrBowl.equals(BatOrBowl.BOWLING)){sortComparator=sortComparator.reversed();}
-        csvList = csvList.stream()
+        List csvList1 = csvList.stream()
                 .sorted(sortComparator)
-                .collect(Collectors.toList());
-        return csvList;
+                .map(cricketDataDAO -> cricketDataDAO.getCricketDataDTO(batOrBowl))
+                .collect(toCollection(ArrayList::new));
+        return csvList1;
     }
 }
