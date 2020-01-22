@@ -12,7 +12,8 @@ import java.util.stream.StreamSupport;
 
 import static java.nio.file.Files.newBufferedReader;
 
-public class DataLoader {
+public abstract class DataLoader {
+    public abstract Map<String, CricketDataDAO> loadCSVRecord(String csvFilePath) throws IPLAnalyserException;
 
     Map<String, CricketDataDAO> csvMap = new HashMap<>();
 
