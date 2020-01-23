@@ -12,7 +12,7 @@ public class IPLAnalyser {
     static Comparator<CricketDataDAO> sortComparator = null;
 
     public enum BatOrBowl{
-        BATTING, BOWLING
+        BATTING, BOWLING, BAT_BOWL
     }
 
     public IPLAnalyser() {
@@ -23,7 +23,7 @@ public class IPLAnalyser {
         this.batOrBowl = batOrBowl;
     }
 
-    public int loadData(String csvFilePath) throws IPLAnalyserException {
+    public int loadData(String... csvFilePath) throws IPLAnalyserException {
         csvMap = new LoadDataFactory().getLoadData(batOrBowl, csvFilePath);
         return csvMap.size();
     }

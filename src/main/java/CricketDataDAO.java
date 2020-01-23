@@ -6,7 +6,8 @@ public class CricketDataDAO {
     public int notOut;
     public int runs;
     public int highScore;
-    public double avg;
+    public double battingAvg;
+    public double bowlingAvg;
     public int ballFaced;
     public double strikeRate;
     public int centuries;
@@ -28,13 +29,13 @@ public class CricketDataDAO {
         notOut = batDataCSV.notOut;
         runs = batDataCSV.runs;
         highScore = batDataCSV.highScore;
-        avg = batDataCSV.avg;
         ballFaced = batDataCSV.ballFaced;
         strikeRate = batDataCSV.strikeRate;
         centuries = batDataCSV.centuries;
         halfCenturies = batDataCSV.halfCenturies;
         fours = batDataCSV.fours;
         sixes = batDataCSV.sixes;
+        battingAvg = batDataCSV.battingAvg;
     }
 
     public CricketDataDAO(BowlingDataCSV bowlDataCSV) {
@@ -46,11 +47,11 @@ public class CricketDataDAO {
         runs = bowlDataCSV.runs;
         wickets = bowlDataCSV.wickets;
         bestBowlingIndex = bowlDataCSV.bestBowlingIndex;
-        avg = bowlDataCSV.avg;
         economyRate = bowlDataCSV.economyRate;
         strikeRate = bowlDataCSV.strikeRate;
         fourWicket = bowlDataCSV.fourWicket;
         fiveWicket = bowlDataCSV.fiveWicket;
+        bowlingAvg = bowlDataCSV.bowlingAvg;
     }
 
     public CricketDataDAO() {
@@ -66,7 +67,8 @@ public class CricketDataDAO {
                 ", notOut=" + notOut +
                 ", runs=" + runs +
                 ", highScore=" + highScore +
-                ", avg=" + avg +
+                ", battingAvg=" + battingAvg +
+                ", bowlingAvg=" + bowlingAvg +
                 ", ballFaced=" + ballFaced +
                 ", strikeRate=" + strikeRate +
                 ", centuries=" + centuries +
@@ -84,7 +86,8 @@ public class CricketDataDAO {
 
     public Object getCricketDataDTO(IPLAnalyser.BatOrBowl batOrBowl) {
         if(IPLAnalyser.BatOrBowl.BATTING.equals(batOrBowl))
-            return new BattingDataCSV(pos, player, matches, inns, notOut, runs, highScore, avg, ballFaced, strikeRate, centuries, halfCenturies, fours, sixes);
-        return new BowlingDataCSV(pos, player, matches, inns, over, runs, wickets, bestBowlingIndex, avg, economyRate, strikeRate, fourWicket, fiveWicket);
+            return new BattingDataCSV(pos, player, matches, inns, notOut, runs, highScore, battingAvg, ballFaced, strikeRate, centuries, halfCenturies, fours, sixes);
+        return new BowlingDataCSV(pos, player, matches, inns, over, runs, wickets, bestBowlingIndex, bowlingAvg, economyRate, strikeRate, fourWicket, fiveWicket);
+
     }
 }

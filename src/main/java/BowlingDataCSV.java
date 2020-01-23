@@ -1,5 +1,4 @@
 import com.opencsv.bean.CsvBindByName;
-import jdk.internal.jline.internal.Nullable;
 
 public class BowlingDataCSV {
 
@@ -20,7 +19,7 @@ public class BowlingDataCSV {
         @CsvBindByName(column = "BBI", required = true)
         public int bestBowlingIndex;
         @CsvBindByName(column = "Avg", required = true)
-        public double avg;
+        public double bowlingAvg;
         @CsvBindByName(column = "Econ", required = true)
         public double economyRate;
         @CsvBindByName(column = "SR", required = true)
@@ -42,7 +41,7 @@ public class BowlingDataCSV {
                 this.runs = runs;
                 this.wickets = wickets;
                 this.bestBowlingIndex = bestBowlingIndex;
-                this.avg = avg;
+                this.bowlingAvg = avg;
                 this.economyRate = economyRate;
                 this.strikeRate = strikeRate;
                 this.fourWicket = fourWicket;
@@ -60,7 +59,7 @@ public class BowlingDataCSV {
                         ", runs=" + runs +
                         ", wickets=" + wickets +
                         ", bestBowlingIndex=" + bestBowlingIndex +
-                        ", avg=" + avg +
+                        ", bowlinAvg=" + bowlingAvg +
                         ", economyRate=" + economyRate +
                         ", strikeRate=" + strikeRate +
                         ", fourWicket=" + fourWicket +

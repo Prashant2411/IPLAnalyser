@@ -16,7 +16,7 @@ public class BattingDataCSV {
     @CsvBindByName(column = "HS", required = true)
     public int highScore;
     @CsvBindByName(column = "Avg", required = true)
-    public double avg;
+    public double battingAvg;
     @CsvBindByName(column = "BF", required = true)
     public int ballFaced;
     @CsvBindByName(column = "SR", required = true)
@@ -40,7 +40,7 @@ public class BattingDataCSV {
                 ", notOut=" + notOut +
                 ", runs=" + runs +
                 ", highScore=" + highScore +
-                ", avg=" + avg +
+                ", battingAvg=" + battingAvg +
                 ", ballFaced=" + ballFaced +
                 ", strikeRate=" + strikeRate +
                 ", centuries=" + centuries +
@@ -61,7 +61,7 @@ public class BattingDataCSV {
         this.notOut=notOut;
         this.runs=runs;
         this.highScore=highScore;
-        this.avg=avg;
+        this.battingAvg =avg;
         this.ballFaced=ballFaced;
         this.strikeRate=strikeRate;
         this.centuries=centuries;
