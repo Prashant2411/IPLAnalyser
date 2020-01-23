@@ -88,6 +88,9 @@ public class CricketDataDAO {
         if(IPLAnalyser.BatOrBowl.BATTING.equals(batOrBowl))
             return new BattingDataCSV(pos, player, matches, inns, notOut, runs, highScore, battingAvg, ballFaced, strikeRate, centuries, halfCenturies, fours, sixes);
         return new BowlingDataCSV(pos, player, matches, inns, over, runs, wickets, bestBowlingIndex, bowlingAvg, economyRate, strikeRate, fourWicket, fiveWicket);
+    }
 
+    public String getPlayer() {
+        return player;
     }
 }

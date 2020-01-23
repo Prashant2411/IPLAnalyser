@@ -31,7 +31,10 @@ public class BattingAdapter extends DataLoader{
             List<BowlingDataCSV> csvList = csvBuilder.getCSVFileInList(reader, className);
                 StreamSupport.stream(csvList.spliterator(), false)
                         .filter(cricketData -> csvDataMap.get(cricketData.player) != null)
-                        .forEach(cricketData -> csvDataMap.get(cricketData.player).bowlingAvg = cricketData.bowlingAvg);
+                        .forEach(cricketData -> {
+                            csvDataMap.get(cricketData.player).bowlingAvg = cricketData.bowlingAvg;
+                            csvDataMap.get(cricketData.player).wickets = cricketData.wickets;
+                        });
             return csvDataMap;
         } catch (IOException e) {
             throw new IPLAnalyserException("Invalid Path",IPLAnalyserException.ExceptionType.FILE_PATH_PROBLEM);

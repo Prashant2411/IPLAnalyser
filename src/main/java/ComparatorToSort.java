@@ -7,7 +7,8 @@ public class ComparatorToSort {
 
     public enum Sorting_Fields {
         BATTING_AVERAGE, STRIKE_RATE, COMPARE_6s_4s, STRIKE_RATE_4S_6S, STRIKE_RATE_AVERAGE, MAX_RUNS, MAX_RUNS_AVERAGES,
-        BOWLING_AVERAGE, ECONOMY_RATE, COMPARE_5W_AND_4W, STRIKE_5W_4W, WICKET, WICKET_AVERAGE, BATTING_BOWLING_AVERAGE
+        BOWLING_AVERAGE, ECONOMY_RATE, COMPARE_5W_AND_4W, STRIKE_5W_4W, WICKET, WICKET_AVERAGE, BATTING_BOWLING_AVERAGE,
+        BEST_ALLROUNDER
     }
 
     public Comparator<CricketDataDAO> getComparator(Sorting_Fields stat) {
@@ -27,6 +28,12 @@ public class ComparatorToSort {
         arrayList.add(arrayList.get(Sorting_Fields.WICKET.ordinal()).thenComparing(arrayList.get(Sorting_Fields.BOWLING_AVERAGE.ordinal())));
 
         arrayList.add(arrayList.get(Sorting_Fields.BATTING_AVERAGE.ordinal()).thenComparing(arrayList.get(Sorting_Fields.BOWLING_AVERAGE.ordinal()).reversed()));
+        Comparator<CricketDataDAO> comp =Comparator.comparing(allRounder -> {
+            if (allRounder.wickets > 7 && allRounder.runs > 150)
+                return allRounder.runs + allRounder.wickets*20;
+            return 0;
+        });
+        arrayList.add(comp.reversed());
         return arrayList.get(stat.ordinal());
     }
 }

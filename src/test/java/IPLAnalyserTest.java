@@ -221,6 +221,19 @@ public class IPLAnalyserTest {
         }
     }
 
+    @Test
+    public void givenBattingBowlingCSV_shouldReturnBestAllRounder() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.BEST_ALLROUNDER, IPLAnalyser.BatOrBowl.BATTING);
+            int size = iplAnalyser.loadData(MOST_RUNS_CSV,BOWLING_CSV);
+            List<BattingDataCSV> list = iplAnalyser.getSorted();
+            Assert.assertEquals("Andre Russell", list.get(0).player);
+            Assert.assertEquals("Shreyas Iyer", list.get(99).player);
+        } catch (IPLAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
     //Exception
 
     @Test
