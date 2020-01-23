@@ -200,7 +200,7 @@ public class IPLAnalyserTest {
     @Test
     public void givenBattingBowlingCSV_shouldReturnCorrectValues() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.COMPARE_5W_AND_4W, IPLAnalyser.BatOrBowl.BAT_BOWL);
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.COMPARE_5W_AND_4W, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadData(MOST_RUNS_CSV,BOWLING_CSV);
             Assert.assertEquals(100, size);
         } catch (IPLAnalyserException e) {
@@ -211,9 +211,9 @@ public class IPLAnalyserTest {
     @Test
     public void givenBattingBowlingCSV_shouldReturnBestBattingBowlingAvg() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.BATTING_BOWLING_AVERAGE, IPLAnalyser.BatOrBowl.BAT_BOWL);
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.BATTING_BOWLING_AVERAGE, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadData(MOST_RUNS_CSV,BOWLING_CSV);
-            List<BowlingDataCSV> list = iplAnalyser.getSorted();
+            List<BattingDataCSV> list = iplAnalyser.getSorted();
             Assert.assertEquals("MS Dhoni", list.get(0).player);
             Assert.assertEquals("Tim Southee", list.get(99).player);
         } catch (IPLAnalyserException e) {
@@ -226,7 +226,7 @@ public class IPLAnalyserTest {
     @Test
     public void givenInvalidPath_shouldThrowException() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.COMPARE_6s_4s, IPLAnalyser.BatOrBowl.BAT_BOWL);
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.COMPARE_6s_4s, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadData(INCORRECT_FILE);
         } catch (IPLAnalyserException e) {
             Assert.assertEquals(IPLAnalyserException.ExceptionType.FILE_PATH_PROBLEM, e.type);
@@ -236,7 +236,7 @@ public class IPLAnalyserTest {
     @Test
     public void givenInvalidHeader_shouldThrowException() {
         try {
-            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.COMPARE_6s_4s, IPLAnalyser.BatOrBowl.BAT_BOWL);
+            IPLAnalyser iplAnalyser = new IPLAnalyser(ComparatorToSort.Sorting_Fields.COMPARE_6s_4s, IPLAnalyser.BatOrBowl.BATTING);
             int size = iplAnalyser.loadData(INCORRECT_FILE_FORMAT);
         } catch (IPLAnalyserException e) {
             Assert.assertEquals(IPLAnalyserException.ExceptionType.INVALID_FILE_DATA_FORMAT, e.type);

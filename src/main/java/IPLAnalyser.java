@@ -12,7 +12,7 @@ public class IPLAnalyser {
     static Comparator<CricketDataDAO> sortComparator = null;
 
     public enum BatOrBowl{
-        BATTING, BOWLING, BAT_BOWL
+        BATTING, BOWLING
     }
 
     public IPLAnalyser() {
